@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Http\Requests\UserRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
@@ -17,15 +17,10 @@ use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the users
-     *
-     * @param  \App\Models\User  $model
-     * @return \Illuminate\View\View
-     */
+   
     public function index(User $model)
-    {
-        return view('users.index', ['users' => $model->paginate(5)]);
+    { $roles = Role::pluck('name', 'name')->all();
+        return view('users.index', ['users' => $model->paginate(5),'roles'=>$roles]);
     }
 
 
@@ -37,13 +32,14 @@ class UserController extends Controller
     }
 
 
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirm-password',
+            'password' =>'required|same:confirm-password',
             'roles' => 'required'
+            
         ]);
 
         $input = $request->all();
@@ -52,7 +48,7 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')
+        return redirect()->route('user.index')
             ->with('flash_message', 'User successfully added.');
     }
 
@@ -66,13 +62,13 @@ class UserController extends Controller
         return view('users.editar', compact('user', 'roles', 'userRole'));
     }
 
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'password' => 'same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
         ]);
     
         $input = $request->all();
@@ -88,7 +84,7 @@ class UserController extends Controller
     
         $user->assignRole($request->input('roles'));
     
-        return redirect()->route('users.index');
+        return redirect()->route('user.index');
     }
     
     public function destroy($id)

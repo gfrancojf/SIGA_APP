@@ -1,56 +1,88 @@
-@extends('layouts.app', ['activePage' => 'dashboard', 'titlePage' => __('Dashboard')])
+@extends('layouts.app', ['activePage' => 'roles', 'titlePage' => 'Roles'])
+
+
 
 @section('content')
-  <div class="content">
-    <div class="container-fluid">
-      <div class="row">
-       
-      
-        <div class="col-lg-3 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-danger card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons">info_outline</i>
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">Roles</h4>
+            <p class="card-category">Lista de roles registrados en la base de datos</p>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12 text-right">
+                @can('role_create')
+                <a href="{{ route('roles.create') }}" class="btn btn-sm btn-facebook">Añadir nuevo rol</a>
+                @endcan
               </div>
-              <p class="card-category">Fixed Issues</p>
-              <h3 class="card-title">75</h3>
             </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">local_offer</i> Tracked from Github
-              </div>
+            <div class="table-responsive">
+              <table class="table ">
+                <thead class="text-primary">
+                  <th> ID </th>
+                  <th> Nombre </th>
+                  <th> Guard </th>
+                  <th> Fecha de creación </th>
+                  <th> Permisos </th>
+                  <th class="text-right"> Acciones </th>
+                </thead>
+                <tbody>
+                  @forelse ($roles as $role)
+                  <tr>
+                    <td>{{ $role->id }}</td>
+                    <td>{{ $role->name }}</td>
+                    <td>{{ $role->guard_name }}</td>
+                    <td class="text-primary">{{ $role->created_at->toFormattedDateString() }}</td>
+                    <td>
+                      @forelse ($role->permissions as $permission)
+                          <span class="badge badge-info">{{ $permission->name }}</span>
+                      @empty
+                          <span class="badge badge-danger">No permission added</span>
+                      @endforelse
+                    </td>
+                    <td class="td-actions text-right">
+                    @can('role_show')
+                      <a href="{{ route('roles.show', $role->id) }}" class="btn btn-info"> <i
+                          class="material-icons">person</i> </a>
+                    @endcan
+                    @can('role_edit')
+                      <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-success"> <i
+                          class="material-icons">edit</i> </a>
+                    @endcan
+                    @can('role_destroy')
+                      <form action="{{ route('roles.destroy', $role->id) }}" method="post"
+                        onsubmit="return confirm('areYouSure')" style="display: inline-block;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" rel="tooltip" class="btn btn-danger">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </form>
+                    @endcan
+                    </td>
+                  </tr>
+                  @empty
+                  <tr>
+                    <td colspan="2">Sin registros.</td>
+                  </tr>
+                  @endforelse
+                </tbody>
+              </table>
+              {{-- {{ $users->links() }} --}}
             </div>
           </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-info card-header-icon">
-              <div class="card-icon">
-                <i class="fa fa-twitter"></i>
-              </div>
-              <p class="card-category">Followers</p>
-              <h3 class="card-title">+245</h3>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">update</i> Just Updated
-              </div>
-            </div>
+          <!--Footer-->
+          <div class="card-footer mr-auto">
+            {{ $roles->links() }}
           </div>
+          <!--End footer-->
         </div>
       </div>
-
-
-      
     </div>
   </div>
+</div>
 @endsection
-
-@push('js')
-  <script>
-    $(document).ready(function() {
-      // Javascript method's body can be found in assets/js/demos.js
-      md.initDashboardPageCharts();
-    });
-  </script>
-@endpush
