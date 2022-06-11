@@ -11,8 +11,8 @@
 
             <div class="card ">
               <div class="card-header card-header-primary">
-                <h4 class="card-title">{{ __('Edit Profile') }}</h4>
-                <p class="card-category">{{ __('User information') }}</p>
+                <h4 class="card-title">{{ __('Editar Mi Perfil') }}</h4>
+                <p class="card-category">{{ __('Informacion del Usuario') }}</p>
               </div>
               <div class="card-body ">
                 @if (session('status'))
@@ -51,7 +51,7 @@
                 </div>
               </div>
               <div class="card-footer ml-auto mr-auto">
-                <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
+                <button type="submit" class="btn btn-primary">{{ __('Guardar Cambios') }}</button>
               </div>
             </div>
           </form>
@@ -65,8 +65,8 @@
 
             <div class="card ">
               <div class="card-header card-header-primary">
-                <h4 class="card-title">{{ __('Change password') }}</h4>
-                <p class="card-category">{{ __('Password') }}</p>
+                <h4 class="card-title">{{ __('Cambiar la contraseña') }}</h4>
+                <p class="card-category">{{ __('Contraseña') }}</p>
               </div>
               <div class="card-body ">
                 @if (session('status_password'))
@@ -82,10 +82,12 @@
                   </div>
                 @endif
                 <div class="row">
-                  <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Current Password') }}</label>
+                  <label class="col-sm-2 col-form-label" for="input-current-password">{{ __('Contraseña actual') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('old_password') ? ' has-danger' : '' }}">
-                      <input class="form-control{{ $errors->has('old_password') ? ' is-invalid' : '' }}" input type="password" name="old_password" id="input-current-password" placeholder="{{ __('Current Password') }}" value="" required />
+                      <input class="form-control{{ $errors->has('old_password') ? ' is-invalid' : '' }}" 
+                      input type="password" name="old_password" id="input-current-password"
+                       placeholder="{{ __('Contraseña actual') }}" value="" required />
                       @if ($errors->has('old_password'))
                         <span id="name-error" class="error text-danger" for="input-name">{{ $errors->first('old_password') }}</span>
                       @endif
@@ -93,10 +95,12 @@
                   </div>
                 </div>
                 <div class="row">
-                  <label class="col-sm-2 col-form-label" for="input-password">{{ __('New Password') }}</label>
+                  <label class="col-sm-2 col-form-label" for="input-password">{{ __('Nueva Contraseña') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
-                      <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" id="input-password" type="password" placeholder="{{ __('New Password') }}" value="" required />
+                      <input class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" 
+                      name="password" id="input-password" type="password" placeholder="{{ __('Nueva Contraseña') }}" 
+                      value="" required />
                       @if ($errors->has('password'))
                         <span id="password-error" class="error text-danger" for="input-password">{{ $errors->first('password') }}</span>
                       @endif
@@ -104,16 +108,16 @@
                   </div>
                 </div>
                 <div class="row">
-                  <label class="col-sm-2 col-form-label" for="input-password-confirmation">{{ __('Confirm New Password') }}</label>
+                  <label class="col-sm-2 col-form-label" for="input-password-confirmation">{{ __('Confirmar Nueva Contraseña') }}</label>
                   <div class="col-sm-7">
                     <div class="form-group">
-                      <input class="form-control" name="password_confirmation" id="input-password-confirmation" type="password" placeholder="{{ __('Confirm New Password') }}" value="" required />
+                      <input class="form-control" name="password_confirmation" id="input-password-confirmation" type="password" placeholder="{{ __('Confirmar Nueva Contraseña') }}" value="" required />
                     </div>
                   </div>
                 </div>
               </div>
               <div class="card-footer ml-auto mr-auto">
-                <button type="submit" class="btn btn-primary">{{ __('Change password') }}</button>
+                <button type="submit" class="btn btn-primary">{{ __('Guardar la Nueva Contraseña') }}</button>
               </div>
             </div>
           </form>
