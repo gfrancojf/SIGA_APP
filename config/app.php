@@ -179,7 +179,7 @@ return [
 
         // spatie
 
-        Spatie\Permission\PermissionServiceProvider::class,
+      //  Spatie\Permission\PermissionServiceProvider::class,
 
 
         // lang spanish

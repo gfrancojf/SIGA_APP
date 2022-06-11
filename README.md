@@ -7,26 +7,9 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-<<<<<<< HEAD
 
-
-
-## Learning Laravel
-
-
-## Laravel Sponsors
-
-
-
-### Premium Partners
-
-
-## Requerimientos
-
-
-=======
 ## Requisitos Basicos
->>>>>>> 5505eb6bf91d98df7dc45796498c1ecb9c15f96d
+
 
 - **PHP -> "^7.3|^8.0"**
 - **NodeJs -> "v16.15.0"**

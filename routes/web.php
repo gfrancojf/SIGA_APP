@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PermissionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,7 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
    // creamos un grupo de rutas protegidas para los controladores
 
     Route::resource('roles', RolController::class);
-    Route::resource('user', UserController::class, ['except' => ['show']]);
+    Route::resource('permissions', PermissionController::class);
+    Route::resource('users', UserController::class);
 
 
 });

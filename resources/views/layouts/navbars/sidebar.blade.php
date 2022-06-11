@@ -27,17 +27,38 @@
         <div class="collapse show" id="laravelExample">
           <ul class="nav">
             <li class="nav-item{{ $activePage == 'profile' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('profile.edit') }}"><i><img style="width:25px" src="{{ asset('material') }}/img/angular.png"></i>
+              <a class="nav-link" href="{{ route('profile.edit') }}">
+                <i><img style="width:25px" src="{{ asset('material') }}/img/angular.png"></i>
                 <span class="sidebar-mini"> UP </span>
                 <span class="sidebar-normal">{{ __('Mi Perfil') }} </span>
               </a>
             </li>
-            <li class="nav-item{{ $activePage == 'user-management' ? ' active' : '' }}">
-              <a class="nav-link" href="{{ route('user.index') }}">
-                <span class="sidebar-mini"> UM </span>
-                <span class="sidebar-normal"> {{ __('User Management') }} </span>
+
+            @can('user_index')
+            <li class="nav-item{{ $activePage == 'user' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('users.index') }}">
+                <i class="material-icons">content_paste</i>
+                  <p>Usuarios</p>
               </a>
             </li>
+            @endcan           
+            @can('permission_index')
+            <li class="nav-item{{ $activePage == 'permissions' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('permissions.index') }}">
+                <i class="material-icons">bubble_chart</i>
+                <p>{{ __('Permissions') }}</p>
+              </a>
+            </li>
+            @endcan
+            @can('role_index')
+            <li class="nav-item{{ $activePage == 'roles' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('roles.index') }}">
+                <i class="material-icons">location_ons</i>
+                  <p>{{ __('Roles') }}</p>
+              </a>
+            </li>
+            @endcan
+         
           </ul>
         </div>
       </li>

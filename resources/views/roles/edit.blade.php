@@ -44,7 +44,7 @@
                                 </div>
                               </td>
                               <td>
-                                {{ $permission }}
+                                {{ $permissions[$id] }}
                               </td>
                             </tr>
                             @endforeach

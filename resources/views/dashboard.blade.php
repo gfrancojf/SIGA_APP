@@ -10,14 +10,20 @@
           <div class="card card-stats">
             <div class="card-header card-header-danger card-header-icon">
               <div class="card-icon">
-                <i class="material-icons">info_outline</i>
+             <i class="fa fa-user-circle" aria-hidden="true"></i>
               </div>
-              <p class="card-category">Fixed Issues</p>
-              <h3 class="card-title">75</h3>
+              @php
+              use App\Models\User;
+                 $cant_usuarios = User::count();                                                
+             @endphp
+
+
+              <p class="card-category">Usuarios</p>
+              <h4 class="card-title"> + {{$cant_usuarios}}</h4>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons">local_offer</i> Tracked from Github
+                <i class="material-icons">local_offer</i> Registrados Actualmente
               </div>
             </div>
           </div>

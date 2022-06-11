@@ -26,7 +26,7 @@
                   <th> ID </th>
                   <th> Nombre </th>
                   <th> Guard </th>
-                  <th> Fecha de creación </th>
+             7
                   <th> Permisos </th>
                   <th class="text-right"> Acciones </th>
                 </thead>
@@ -35,8 +35,7 @@
                   <tr>
                     <td>{{ $role->id }}</td>
                     <td>{{ $role->name }}</td>
-                    <td>{{ $role->guard_name }}</td>
-                    <td class="text-primary">{{ $role->created_at->toFormattedDateString() }}</td>
+                    <td>{{ $role->guard_name }}</td>          
                     <td>
                       @forelse ($role->permissions as $permission)
                           <span class="badge badge-info">{{ $permission->name }}</span>
@@ -45,24 +44,23 @@
                       @endforelse
                     </td>
                     <td class="td-actions text-right">
-                    @can('role_show')
-                      <a href="{{ route('roles.show', $role->id) }}" class="btn btn-info"> <i
-                          class="material-icons">person</i> </a>
-                    @endcan
-                    @can('role_edit')
+               
+                               
                       <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-success"> <i
                           class="material-icons">edit</i> </a>
-                    @endcan
-                    @can('role_destroy')
-                      <form action="{{ route('roles.destroy', $role->id) }}" method="post"
-                        onsubmit="return confirm('areYouSure')" style="display: inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" rel="tooltip" class="btn btn-danger">
-                          <i class="material-icons">close</i>
-                        </button>
-                      </form>
-                    @endcan
+              
+                @can('role_destroy')
+                <form action="{{ route('roles.destroy', $role->id) }}" method="post"
+                  onsubmit="return confirm('areYouSure')" style="display: inline-block;">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" rel="tooltip" class="btn btn-danger">
+                    <i class="material-icons">close</i>
+                  </button>
+                </form>
+                @endcan
+                      
+             
                     </td>
                   </tr>
                   @empty
