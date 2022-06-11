@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function index(User $model)
     {
-        return view('users.index', ['users' => $model->paginate(15)]);
+        return view('users.index', ['users' => $model->paginate(5)]);
     }
 
 
@@ -94,7 +94,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('users.index');
+        return redirect()->route('user.index');
     }
 
 }

@@ -1,56 +1,67 @@
-@extends('layouts.app', ['activePage' => 'dashboard', 'titlePage' => __('Dashboard')])
+@extends('layouts.app', ['activePage' => 'user-management', 'titlePage' => __('User Management')])
 
 @section('content')
-  <div class="content">
-    <div class="container-fluid">
-      <div class="row">
-       
-      
-        <div class="col-lg-3 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-danger card-header-icon">
-              <div class="card-icon">
-                <i class="material-icons">info_outline</i>
-              </div>
-              <p class="card-category">Fixed Issues</p>
-              <h3 class="card-title">75</h3>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">local_offer</i> Tracked from Github
-              </div>
-            </div>
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title ">Usuario del Sistema</h4>
+            <sub class="card-category"> Listados de Usuarios</sub>
           </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-          <div class="card card-stats">
-            <div class="card-header card-header-info card-header-icon">
-              <div class="card-icon">
-                <i class="fa fa-twitter"></i>
-              </div>
-              <p class="card-category">Followers</p>
-              <h3 class="card-title">+245</h3>
-            </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="material-icons">update</i> Just Updated
-              </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    #
+                  </th>
+                  <th>
+                    Nombre
+                  </th>
+                  <th>
+                    Perfil y Rol
+                  </th>
+                  <th>
+                    Acciones
+                  </th>
+                </thead>
+                <tbody>
+                  @foreach ($users as $user)
+                  <tr>
+                    <td style="display: none;">{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>
+                      @if(!empty($user->getRoleNames()))
+                        @foreach($user->getRoleNames() as $rolNombre)                                       
+                          <h5><span class="badge badge-dark">{{ $rolNombre }}</span></h5>
+                        @endforeach
+                      @endif
+                    </td>
+
+                    <td>                                  
+                      <a class="btn btn-info" href="{{ route('user.edit',$user->id) }}"> <i class="fa fa-edit" aria-hidden="true"></i></a>
+
+                      {!! Form::open(['method' => 'DELETE','route' => ['user.destroy', $user->id],'style'=>'display:inline']) !!}
+                      <button type="submit" class="btn btn-danger  fa fa-trash"></button>
+                      
+                      {!! Form::close() !!}
+                    </td>
+                  </tr>
+                @endforeach
+                </tbody>
+              </table>
+              <div class="pagination justify-content-end">
+                {!! $users->links() !!}
+              </div> 
             </div>
           </div>
         </div>
       </div>
-
-
-      
+     
     </div>
   </div>
+</div>
 @endsection
-
-@push('js')
-  <script>
-    $(document).ready(function() {
-      // Javascript method's body can be found in assets/js/demos.js
-      md.initDashboardPageCharts();
-    });
-  </script>
-@endpush
