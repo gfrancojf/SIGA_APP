@@ -7,9 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Requerimientos
-
-
+## Requisitos Basicos
 
 - PHP -> "^7.3|^8.0"
 - NodeJs -> "v16.15.0"
