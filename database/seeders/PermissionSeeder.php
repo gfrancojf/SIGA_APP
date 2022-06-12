@@ -31,6 +31,8 @@ class PermissionSeeder extends Seeder
             'departament_index', 'departament_create','departament_show','departament_edit','departament_destroy',
 
             'employee_index','employee_create','employee_show','employee_edit','employee_destroy',
+            
+            'location_index','location_create','location_show','location_edit','location_destroy',
  ];
 
         foreach ($permissions as $permission) {

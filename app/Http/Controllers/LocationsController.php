@@ -1,85 +1,71 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Gate;
 use App\Models\Locations;
 use Illuminate\Http\Request;
 
 class LocationsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
-        //
+        abort_if(Gate::denies('location_index'), 403);
+            $locations = Locations::all();
+            return view('location.index', compact('locations'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        abort_if(Gate::denies('location_create'), 403);
+
+        return view('location.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $locationsData = $request->validate([
+            'name' => 'required|max:25|unique:locations',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Locations  $locations
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Locations $locations)
+        $locations = Locations::create($locationsData);
+
+        return redirect()->route('locations.index')
+        ->with('success', 'La Oficina ha sido guardada!');
+    }
+   
+    public function show($id)
     {
-        //
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Locations  $locations
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Locations $locations)
     {
-        //
+        abort_if(Gate::denies('location_edit'), 403);
+        $locations = Locations::findOrFail($locations->id);
+        return view('location.edit', compact('locations'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Locations  $locations
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Locations $locations)
     {
-        //
+        $locationsData = $request->validate([
+            'name' => 'required|max:255|unique:locations'
+        ]);
+
+        $locations->update($locationsData);
+
+        return redirect()->route('locations.index')
+        ->with('success', 'La Oficina ha sido actualizada!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Locations  $locations
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Locations $locations)
     {
-        //
+        abort_if(Gate::denies('location_destroy'), 403);
+        $locations->delete();
+
+        return redirect()->route('locations.index')
+        ->with('success', 'La Oficina ha sido eliminada!');
+
     }
 }

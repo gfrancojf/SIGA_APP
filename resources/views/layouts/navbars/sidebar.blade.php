@@ -40,7 +40,7 @@
                 <div class="collapse show" id="lx">
                     <ul class="nav">
                   
-                            <li class="nav-item{{ $activePage == 'employees' ? ' active' : '' }}">
+                            <li class="nav-item{{ $activePage == 'employees' ? ' active' : 'Expedientes' }}">
                                 <a class="nav-link" href="{{ route('employees.index') }}">
                                 <i class="fa fa-clipboard" aria-hidden="true"></i>
                                    
@@ -48,7 +48,7 @@
                                 </a>
                             </li>
                             @can('branch_index')
-                            <li class="nav-item{{ $activePage == 'branches' ? ' active' : '' }}">
+                            <li class="nav-item{{ $activePage == 'branches' ? ' active' : 'Empresas' }}">
                                 <a class="nav-link" href="{{ route('branches.index') }}">
                             <i class="fa fa-building" aria-hidden="true"></i>
                                 <p>{{ __('Empresas') }}</p>
@@ -56,10 +56,18 @@
                             </li>
                             @endcan
                             @can('departament_index')
-                            <li class="nav-item{{ $activePage == 'departaments' ? ' active' : '' }}">
+                            <li class="nav-item{{ $activePage == 'departaments' ? ' active' : 'Oficinas' }}">
                                 <a class="nav-link" href="{{ route('departaments.index') }}">
                                    <i class="fa fa-building-o" aria-hidden="true"></i>
                                     <p>{{ __('Oficinas') }}</p>
+                                </a>
+                            </li>
+                            @endcan
+                            @can('location_index')
+                            <li class="nav-item{{ $activePage == 'locations' ? ' active' : ' Estanterias' }}">
+                                <a class="nav-link" href="{{ route('locations.index') }}">
+                                   <i class="fa fa-building-o" aria-hidden="true"></i>
+                                    <p>{{ __('Estanterias') }}</p>
                                 </a>
                             </li>
                             @endcan

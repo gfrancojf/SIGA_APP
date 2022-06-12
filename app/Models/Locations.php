@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Locations extends Model
 {
     use HasFactory;
+
+    
+    protected $guarded =['id','created_at','updated_at' ];
+
+
+
+
+    public function employee()
+    {
+        return $this->hasMany(Employees::class);
+    }
+
 }
