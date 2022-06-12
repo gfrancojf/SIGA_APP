@@ -15,9 +15,4 @@
 - **NodeJs -> "v16.15.0"**
 - **Composer -> "2.2.13"**
 
-
-
-
-
-
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

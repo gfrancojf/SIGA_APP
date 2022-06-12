@@ -5,6 +5,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\DepartamentController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\EmployeeController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,6 +42,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('roles', RolController::class);
     Route::resource('permissions', PermissionController::class);
     Route::resource('users', UserController::class);
+
+
+    Route::resource('departaments', DepartamentController::class);
+    Route::resource('branches', BranchController::class);
+    Route::resource('location', LocationController::class) 
+    ->names('location');
+    Route::resource('employees', EmployeeController::class)
+    ->names('employees');
+
+
 
 
 });
